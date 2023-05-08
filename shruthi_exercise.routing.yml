@@ -1,0 +1,26 @@
+shruthi_exercise.hello_world:
+  path: '/helloo-world'
+  defaults:
+    _controller: '\Drupal\shruthi_exercise\Controller\CustomController::hello'
+    _title: 'Hello World'
+  requirements:
+    _permission: 'custom controller permission'
+
+shruthi_exercise.custom_form:
+  path: '/custom-form'
+  defaults:
+    _form: '\Drupal\shruthi_exercise\Form\CustomForm'
+    _title: 'User Details '
+  requirements:
+    _permission: 'access content'
+
+
+shruthi_exercise.config_form:
+  path: '/config-form'
+  defaults:
+    _form: '\Drupal\shruthi_exercise\Form\CustomConfigForm'
+    _title: 'User details'
+  requirements:
+    _permission: 'custom config form permission'
+  options:
+    _admin_route: TRUE

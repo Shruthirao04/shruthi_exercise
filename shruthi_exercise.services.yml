@@ -1,0 +1,4 @@
+services:
+  custom_service:
+    class : Drupal\shruthi_exercise\CustomService
+    arguments: ['@config.factory']

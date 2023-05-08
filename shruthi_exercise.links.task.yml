@@ -1,0 +1,18 @@
+shruthi_exercise.custom: # The first plugin ID
+  route_name: shruthi_exercise.custom_form
+  title: CustomForm
+  base_route: shruthi_exercise.controller
+  weight: 1
+
+shruthi_exercise.config:
+  route_name: shruthi_exercise.config_form
+  title : CustomConfigForm
+  base_route: shruthi_exercise.controller
+  weight: 2
+
+
+shruthi_exercise.controller_demo:
+  route_name: shruthi_exercise.hello_world
+  title : Controller
+  base_route: shruthi_exercise.controller
+  weight: 3

@@ -1,0 +1,7 @@
+name: 'shruthi Exercise' #name of the module
+description: 'New exercise desc' #adds description of the module
+type: module #specifies the type such as module,theme etc
+core_version_requirement: ^9 || ^10 #specifies the  min version of the drupal core of module compatible
+version: 9.x-1.0 #version of the module
+
+#info.yml file is used to create module

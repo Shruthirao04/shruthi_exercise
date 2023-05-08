@@ -1,0 +1,5 @@
+add_content.config:
+  route_name: "shruthi_exercise.config_form" #route name of where the menu takes
+  title: "Configform"
+  appears_on:
+    - "shruthi_exercise.custom_form" #route name of where the menu should appear

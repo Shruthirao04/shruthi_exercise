@@ -1,0 +1,4 @@
+config form permission:
+  title: Permission
+  description: Permission desc
+  #creates a custom permission

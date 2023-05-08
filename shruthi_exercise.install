@@ -1,0 +1,44 @@
+<?php
+// update => module reinstallation not required.
+/**
+ * implements hook_schema().
+ */
+// used to store the data in the database
+function shruthi_exercise_schema() {
+    $schema['user_details'] = [
+        'description' => 'Stores user details',
+        'fields' => [
+            'id' => [
+                'description' => 'serial number',
+                'type' => 'serial',
+                'not null' => true
+            ],
+            'subject' => [
+                'description' => 'subject of the user',
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => true,
+            ],
+            'department' => [
+                'description' => 'department of the user',
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => true,
+            ],
+            'email' => [
+                'description' => 'Email of the user',
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => true,
+            ],
+            'age' => [
+                'description' => 'age of the user',
+                'type' => 'varchar',
+                'length' => 60,
+                'not null' => true,
+            ],
+        ],
+        'primary key' => ['id'],
+    ];
+    return $schema;
+}

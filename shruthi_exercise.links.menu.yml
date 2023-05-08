@@ -1,0 +1,5 @@
+example.admin:
+  title: 'Control'
+  description: 'Controller menu'
+  route_name: 'shruthi_exercise.hello_world' #route name of where the menu takes
+  parent: system.admin #name of where its present
