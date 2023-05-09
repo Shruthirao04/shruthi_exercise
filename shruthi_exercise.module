@@ -5,9 +5,9 @@ use Drupal\Core\Form\FormStateInterface;
  * implements hook_form_alter
  */
 
- function shruthi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) {
-    $data = \Drupal::service('custom_service')->getName();
-    print_r($data);
+ function shruthi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) { #implements form alter
+    $data = \Drupal::service('custom_service')->getName(); #retrieves the service by calling method
+    print_r($data); #prints the data
   }
  /**
  * Implements hook_theme().

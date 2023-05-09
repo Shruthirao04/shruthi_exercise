@@ -1,26 +1,26 @@
 shruthi_exercise.hello_world:
-  path: '/helloo-world'
+  path: '/helloo-world' #path name
   defaults:
-    _controller: '\Drupal\shruthi_exercise\Controller\CustomController::hello'
-    _title: 'Hello World'
+    _controller: '\Drupal\shruthi_exercise\Controller\CustomController::hello' #this path is called when url is put
+    _title: 'Hello World' #title name
   requirements:
-    _permission: 'custom controller permission'
+    _permission: 'custom controller permission' #users should have permission to access
 
 shruthi_exercise.custom_form:
-  path: '/custom-form'
+  path: '/custom-form' #path name
   defaults:
-    _form: '\Drupal\shruthi_exercise\Form\CustomForm'
-    _title: 'User Details '
+    _form: '\Drupal\shruthi_exercise\Form\CustomForm' #this path is called when url is put
+    _title: 'User Details ' #title name
   requirements:
-    _permission: 'access content'
+    _permission: 'access content' #access to all users
 
 
 shruthi_exercise.config_form:
-  path: '/config-form'
+  path: '/config-form' #path name
   defaults:
-    _form: '\Drupal\shruthi_exercise\Form\CustomConfigForm'
-    _title: 'User details'
+    _form: '\Drupal\shruthi_exercise\Form\CustomConfigForm' #this path is called when url is put
+    _title: 'User details' #title name
   requirements:
-    _permission: 'custom config form permission'
+    _permission: 'custom config form permission' #users should have permission to access
   options:
-    _admin_route: TRUE
+    _admin_route: TRUE #admin route is enabled
