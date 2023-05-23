@@ -2,3 +2,13 @@ services: #provides a service
   custom_service: #service name
     class : Drupal\shruthi_exercise\CustomService #path
     arguments: ['@config.factory'] #arguments used
+
+  custom_events_user_login:
+    class: '\Drupal\shruthi_exercise\EventSubscriber\UserRedirect'
+    tags:
+      - { name: 'event_subscriber' }
+
+  custom_events_subscriber:
+    class: '\Drupal\shruthi_exercise\EventSubscriber\CustomEventSubscriber'
+    tags:
+      - { name: 'event_subscriber' }
