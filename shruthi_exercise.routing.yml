@@ -12,7 +12,7 @@ shruthi_exercise.custom_form:
     _form: '\Drupal\shruthi_exercise\Form\CustomForm' #this path is called when url is put
     _title: 'User Details ' #title name
   requirements:
-    _permission: 'access content' #access to all users
+    _permission: 'access content' #admin route enable
 
 
 shruthi_exercise.config_form:
@@ -24,3 +24,11 @@ shruthi_exercise.config_form:
     _permission: 'custom config form permission' #users should have permission to access
   options:
     _admin_route: TRUE #admin route is enabled
+
+dependent.form:
+  path: '/dropdown' #path name
+  defaults:
+    _form: '\Drupal\shruthi_exercise\Form\DependentDropdownForm' #this path is called when url is put
+    _title: 'Dependent Dropdown' #title name
+  requirements:
+    _permission: 'access content' #admin route enable

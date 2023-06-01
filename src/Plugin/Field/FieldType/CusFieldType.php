@@ -14,8 +14,9 @@ use Drupal\Core\TypedData\DataDefinition;
  *   id = "custom_field",
  *   label = @Translation("Custom Field"),
  *   description = @Translation("Desc for Custom Field"),
- *   category = @Translation("Text")
+ *   category = @Translation("Text"),
  *   default_widget = "cus_field_widget",
+ *   default_formatter = "cus_field_formatter",
  * )
  */
 
