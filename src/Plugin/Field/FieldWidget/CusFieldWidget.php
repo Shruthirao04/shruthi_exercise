@@ -18,55 +18,60 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-
 class CusFieldWidget extends WidgetBase {
 
-    /**
-     * {@inheritdoc}
-     */
+  /**
+   * {@inheritdoc}
+   */
+  public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+    // Renders the form for field.
+    // Checks if the value exists for that field.
+    $value = $items[$delta]->value ?? "";
+    $element = $element + [
+      '#type' => 'textfield',
+      '#suffix' => "<span>" . $this->getFieldSetting("moreinfo") . "</span>",
+      '#default_value' => $value,
+      '#attributes' => [
+        'testplacer' => $this->getSetting('textplacer'),
+      ],
+    ];
+    // Returns the value.
+    return ['value' => $element];
+  }
 
-    public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) { //renders the form for field
-        $value = isset($items[$delta]->value) ? $items[$delta]->value : ""; //checks if the value exists for that field
-        $element = $element + [
-            '#type' => 'textfield',
-            '#suffix' => "<span>" . $this->getFieldSetting("moreinfo") . "</span>",
-            '#default_value' => $value,
-            '#attributes' => [
-                'testplacer' => $this->getSetting('textplacer'),
-            ],
-        ];
-        return ['value' => $element]; //returns the value
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public static function defaultSettings() {
+    // Default settings for field widget.
+    return [
+      'textplacer' => 'none',
+    // Calling the function from parent class.
+    ] + parent::defaultSettings();
+  }
 
-    /**
-      * {@inheritdoc}
-      */
-    public static function defaultSettings() { //default settings for field widget
-        return [
-            'textplacer' => 'none',
-        ] + parent::defaultSettings(); //calling the function from parent class
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+    // Form to configure settings.
+    $element['textplacer'] = [
+      '#type' => 'textfield',
+      '#title' => 'text placer',
+      '#default_value' => $this->getSetting('textplacer'),
+    ];
+    return $element;
+  }
 
-    /**
-       * {@inheritdoc}
-       */
-    public function settingsForm(array $form, FormStateInterface $form_state) { //form to configure settings
-        $element['textplacer'] = [
-            '#type' => 'textfield',
-            '#title' => 'text placer',
-            '#default_value' => $this->getSetting('textplacer'),
-        ];
-        return $element;
-    }
-
-    /**
-       * {@inheritdoc}
-       */
-    public function settingsSummary() { //gives the summary of what settings is been applied
-        $summary = [];
-        $summary[] = $this->t("textplacer text: @textplacer", array("@textplacer" => $this->getSetting("textplacer"))); //adds a translated string with a placeholder value to an array.
-        return $summary;
-    }
-
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    // Gives the summary of what settings is been applied.
+    $summary = [];
+    // Adds a translated string with a placeholder value to an array.
+    $summary[] = $this->t("textplacer text: @textplacer", ["@textplacer" => $this->getSetting("textplacer")]);
+    return $summary;
+  }
 
 }

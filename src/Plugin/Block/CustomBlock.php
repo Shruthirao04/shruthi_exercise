@@ -1,11 +1,8 @@
 <?php
 
-
 namespace Drupal\shruthi_exercise\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormInterface;
-use Drupal\custom_task\Form\CustomForm;
 
 /**
  * Provides a 'Custom' block.
@@ -23,7 +20,8 @@ class CustomBlock extends BlockBase {
   public function build() {
 
     $form = \Drupal::formBuilder()->getForm('Drupal\shruthi_exercise\Form\CustomForm');
-    #renders form in a block
+    // Renders form in a block.
     return $form;
   }
+
 }

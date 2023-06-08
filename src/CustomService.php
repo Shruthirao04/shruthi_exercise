@@ -5,7 +5,7 @@ namespace Drupal\shruthi_exercise;
 use Drupal\Core\Config\ConfigFactory;
 
 /**
- * Class CustomService.
+ * Implements custom service.
  *
  * @package Drupal\shruthi_exercise\Services
  */
