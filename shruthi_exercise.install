@@ -1,4 +1,6 @@
 <?php
+
+use Drupal\node\Entity\Node;
 // update => module reinstallation not required.
 /**
  * implements hook_schema().
@@ -41,4 +43,33 @@ function shruthi_exercise_schema() {
         'primary key' => ['id'],
     ];
     return $schema;
+}
+
+/*
+* Implement hook_update_N().
+*/
+function shruthi_exercise_update_100401(){
+    $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings');
+    $config->set('branch','CSE');
+    $config->save();
+}
+function shruthi_exercise_update_100403(){
+    $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings');
+    $config->set('branch','hello');
+    $config->save();
+}
+function shruthi_exercise_update_100412() {
+    $query = \Drupal::entityQuery('node')
+    ->accessCheck(TRUE)
+    ->condition('type', 'article');
+    $nids = $query->execute();
+
+    $nodes = Node::loadMultiple($nids);
+
+    foreach ($nodes as $node) {
+      $node->set("field_plain","shruthi");
+      $node->save();
+    }
+    \Drupal::messenger()->addMessage('Nodes updated');
+
 }
