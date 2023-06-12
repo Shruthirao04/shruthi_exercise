@@ -1,26 +1,39 @@
 <?php
+
+/**
+ * @file
+ * This is a short desc.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * implements hook_form_alter
+ * Implements hook_form_alter().
  */
+function shruthi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Gets called whenever form is opened.
+  // Calling service to call getName func from CustomService.php.
+  $data = \Drupal::service('custom_service')->getName();
+  // Prints the value provided in the config form.
+  print_r($data);
+}
 
- function shruthi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) { #implements form alter
-    $data = \Drupal::service('custom_service')->getName(); #retrieves the service by calling method
-    print_r($data); #prints the data
-  }
- /**
+/**
  * Implements hook_theme().
  */
 function shruthi_exercise_theme($existing, $type, $theme, $path) {
-#creates a theme in the controller
-    return [
-       'shruthi_template' => [
-           'variables' => [
-                'markup' => "",
-                'hexcode'=> "",
-            ],
-       ],
-   ];
 
- }
+  return [
+  // Name for the template file (html.twig)
+    'shruthi_template' => [
+  // Defined variables to be returned.
+      'variables' => [
+  // Can provide default value for markup here.
+        'markup' => "",
+  // Can prove default value for hexcode here.
+        'hexcode' => "",
+      ],
+    ],
+  ];
+
+}

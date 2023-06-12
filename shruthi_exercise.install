@@ -1,75 +1,56 @@
 <?php
 
-use Drupal\node\Entity\Node;
-// update => module reinstallation not required.
 /**
- * implements hook_schema().
+ * @file
+ * Update => module reinstallation not required.
  */
-// used to store the data in the database
+
+/**
+ * Implements hook_schema().
+ */
 function shruthi_exercise_schema() {
-    $schema['user_details'] = [
-        'description' => 'Stores user details',
-        'fields' => [
-            'id' => [
-                'description' => 'serial number',
-                'type' => 'serial',
-                'not null' => true
-            ],
-            'subject' => [
-                'description' => 'subject of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'department' => [
-                'description' => 'department of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'email' => [
-                'description' => 'Email of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'age' => [
-                'description' => 'age of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-        ],
-        'primary key' => ['id'],
-    ];
-    return $schema;
-}
-
-/*
-* Implement hook_update_N().
-*/
-function shruthi_exercise_update_100401(){
-    $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings');
-    $config->set('branch','CSE');
-    $config->save();
-}
-function shruthi_exercise_update_100403(){
-    $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings');
-    $config->set('branch','hello');
-    $config->save();
-}
-function shruthi_exercise_update_100412() {
-    $query = \Drupal::entityQuery('node')
-    ->accessCheck(TRUE)
-    ->condition('type', 'article');
-    $nids = $query->execute();
-
-    $nodes = Node::loadMultiple($nids);
-
-    foreach ($nodes as $node) {
-      $node->set("field_plain","shruthi");
-      $node->save();
-    }
-    \Drupal::messenger()->addMessage('Nodes updated');
-
+  // Creates a table structure in the database.
+  // Name of the schema is user-details.
+  $schema['user_details'] = [
+  // Desc fo the table.
+    'description' => 'Stores user details',
+    'fields' => [
+      'id' => [
+  // First field which is auto increment and not null.
+        'description' => 'serial number',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'subject' => [
+        'description' => 'subject of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'department' => [
+        'description' => 'Last Name of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'email' => [
+        'description' => 'Email of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'age' => [
+        'description' => 'age of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
 }
