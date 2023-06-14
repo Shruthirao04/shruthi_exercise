@@ -54,3 +54,25 @@ function shruthi_exercise_schema() {
   ];
   return $schema;
 }
+
+/**
+ * Implement hook_update_N().
+ */
+
+/**
+ * TO MAKE CHANGES ON CONFIG FORM.
+ */
+function shruthi_exercise_update_100308() {
+  /* $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings'); */
+  // $config->set('email','shruthirao8042@gmail.com');
+  // $config->save();
+  $query = \Drupal::entityQuery('node')->condition('type', 'article')->accessCheck(TRUE);
+  $nids = $query->execute();
+  $nodes = Node::loadMultiple($nids);
+  foreach ($nodes as $node) {
+    $node->set("title", strtoupper("new value"));
+    $node->save();
+  }
+  \Drupal::messenger()->addMessage('Article title updated');
+
+}
