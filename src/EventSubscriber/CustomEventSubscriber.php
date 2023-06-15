@@ -58,8 +58,6 @@ class CustomEventSubscriber implements EventSubscriberInterface {
    *   Our custom event object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    // Format timestamp into date time.
-    $dateFormatter = \Drupal::service('date.formatter');
 
     // Takes user data.
     $account_created = $this->database->select('users_field_data', 'ud')
@@ -70,7 +68,7 @@ class CustomEventSubscriber implements EventSubscriberInterface {
       ->execute()
       ->fetchField();
 
-    $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', ['%created_date' => $dateFormatter->format($account_created, 'short')]));
+    $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', ['%created_date' =>$this-> $dateFormatter->format($account_created, 'short')]));
   }
 
 }

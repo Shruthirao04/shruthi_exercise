@@ -2,40 +2,38 @@
 
 namespace Drupal\shruthi_exercise\Controller;
 
-use Drupal\shruthi_exercise\CustomServiceInterface;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\shruthi_exercise\CustomService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-// Defines namespace for controller of this module.
-// Imports the class files in php.
-use Drupal\Core\Controller\ControllerBase;
-
 /**
-   *  Customservice.
-   *
-   * @var \Drupal\shruthi_exercise\CustomService
-   */
-    protected $customService;
-
-/**
- * Inherits Parent class.
+ * To include custom_service.
  */
 class CustomController extends ControllerBase {
-
   /**
-   * Extension of the class.
+   * The customservice.
+   *
+   * @var \Drupal\pragathi_exercise\CustomService
    */
-  public function __construct(CustomServiceInterface $customService) {
-    $this->customService = $customservice;
-  }
+  protected $customService;
 
   /**
-   * Create function.
+   * Dependency injection.
    */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('custom_service')
     );
   }
+
+/**
+   * Constructor.
+   */
+  public function __construct(CustomService $customService) {
+    $this->customService = $customService;
+  }
+
+
 
   /**
    * Defines the service.
