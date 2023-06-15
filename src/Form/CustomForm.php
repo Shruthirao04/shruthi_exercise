@@ -4,11 +4,50 @@ namespace Drupal\shruthi_exercise\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Inherits parent class.
  */
 class CustomForm extends FormBase {
+  /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * The database service.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * CustomForm constructor.
+   *
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database service.
+   */
+  public function __construct(MessengerInterface $messenger, Connection $database) {
+    $this->messenger = $messenger;
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger'),
+      $container->get('database')
+    );
+  }
 
   /**
    * Generated form id.
@@ -57,8 +96,8 @@ class CustomForm extends FormBase {
    * Submit form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    \Drupal::messenger()->addMessage("User Details Submitted Successfully");
-    \Drupal::database()->insert("user_details")->fields([
+    $this->messenger->addMessage("User Details Submitted Successfully");
+    $this->database->insert("user_details")->fields([
       'subject' => $form_state->getValue("subject"),
       'department' => $form_state->getValue("department"),
       'email' => $form_state->getValue("email"),

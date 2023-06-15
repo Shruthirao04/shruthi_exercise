@@ -32,3 +32,11 @@ dependent.form:
     _title: 'Dependent Dropdown' #title name
   requirements:
     _permission: 'access content' #admin route enable
+
+shruthi_exercise.form:
+  path: '/newdrop'
+  defaults:
+    _form: '\Drupal\shruthi_exercise\Form\DependentDropdown'
+    _title: 'Dependent Dropdown'
+  requirements:
+    _permission: 'access content'

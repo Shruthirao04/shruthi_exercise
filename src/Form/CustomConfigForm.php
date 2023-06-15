@@ -4,6 +4,9 @@ namespace Drupal\shruthi_exercise\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * Inherits parent class.
@@ -15,6 +18,36 @@ class CustomConfigForm extends ConfigFormBase {
    */
   // Defines new php constant.
   const CONFIGNAME = "shruthi_exercise.settings";
+
+  /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * CustomConfigForm constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The configuration factory.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, MessengerInterface $messenger) {
+    parent::__construct($config_factory);
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('messenger')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -68,12 +101,13 @@ class CustomConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Function for submitting form.
-    $config = $this->config(static::CONFIGNAME);
+    $config = $this->config(static::CONFIGNAME)
     // Sets the value of a config key to the value submitted in a form field.
-    $config->set("branch", $form_state->getValue('branch'));
-    $config->set("batch", $form_state->getValue('batch'));
+      ->set("branch", $form_state->getValue('branch'))
+      ->set("batch", $form_state->getValue('batch'))
     // Saves the form values.
-    $config->save();
+      ->save();
+    $this->messenger->addStatus($this->t('The configuration is done.'));
   }
 
 }
