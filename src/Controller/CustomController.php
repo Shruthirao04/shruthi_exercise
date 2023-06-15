@@ -10,6 +10,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
+   *  Customservice.
+   *
+   * @var \Drupal\shruthi_exercise\CustomService
+   */
+    protected $customService;
+
+/**
  * Inherits Parent class.
  */
 class CustomController extends ControllerBase {
@@ -18,7 +25,7 @@ class CustomController extends ControllerBase {
    * Extension of the class.
    */
   public function __construct(CustomServiceInterface $customService) {
-    $this->customService = $customService;
+    $this->customService = $customservice;
   }
 
   /**
@@ -26,7 +33,7 @@ class CustomController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('shruthi_exercise.custom_service')
+      $container->get('custom_service')
     );
   }
 
@@ -34,7 +41,7 @@ class CustomController extends ControllerBase {
    * Defines the service.
    */
   public function hello() {
-    $data = \Drupal::service('custom_service')->getName();
+    $data = $this->customService->getName();
     return [
     // Theme name.
       '#theme' => "shruthi_template",

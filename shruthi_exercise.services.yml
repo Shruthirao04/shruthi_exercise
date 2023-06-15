@@ -7,11 +7,14 @@ services: #provides a service
     class: '\Drupal\shruthi_exercise\EventSubscriber\UserRedirect'
     tags:
       - { name: 'event_subscriber' }
+    arguments: ['@messenger','@database']
 
   custom_events_subscriber:
     class: '\Drupal\shruthi_exercise\EventSubscriber\CustomEventSubscriber'
     tags:
       - { name: 'event_subscriber' }
+    arguments: ['@messenger']
+
 
   shruthi_exercise.commands:                                        #It's a unique identifier for the service
     class: \Drupal\shruthi_exercise\Commands\DrushHelpersCommands
