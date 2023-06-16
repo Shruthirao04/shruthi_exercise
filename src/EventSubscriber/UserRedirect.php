@@ -12,7 +12,7 @@ use Drupal\Core\Messenger\MessengerInterface;
 /**
  * Description for class.
  */
-class EventsSubscriberDemo implements EventSubscriberInterface {
+class UserRedirect implements EventSubscriberInterface {
   /**
    * Extending the baseclass.
    *

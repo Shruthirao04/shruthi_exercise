@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\shruthi_exercise\Event\UserLoginEvent;
 
 /**
  * Implements hook_form_alter().
@@ -50,20 +51,24 @@ function shruthi_exercise_user_login($account) {
   $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }
 
-
 /**
- * Implements hook_mail().
+ * Implements hook_page_attachments_alter().
  */
-function custom_mail_mail($key, &$message, $params) {
-  $options = array(
-    'langcode' => $message['langcode'],
-  );
-
-  switch ($key) {
-    case 'create_article':
-      $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('Page created: @title', array('@title' => $params['node_title']), $options);
-      $message['body'][] = $params['message'];
-      break;
+function shruthi_exercise_page_attachments_alter(array &$attachments) {
+  // Calling the service.
+  $route_match = \Drupal::routeMatch();
+  // Getting the route name of the particular page.
+  $route_name = $route_match->getRouteName();
+  // print_r($route_name);exit;
+  // If the route name matches.
+  if ($route_name === 'comment.admin') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
+  }
+  // If the route name matches.
+  elseif ($route_name === 'entity.node.canonical') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
   }
 }
+
