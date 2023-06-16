@@ -63,7 +63,7 @@ function shruthi_exercise_schema() {
  * TO MAKE CHANGES ON CONFIG FORM.
  */
 function shruthi_exercise_update_100308() {
-  /* $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings'); */
+  // $config = \Drupal::configFactory()->getEditable('shruthi_exercise.settings');
   // $config->set('email','shruthirao8042@gmail.com');
   // $config->save();
   $query = \Drupal::entityQuery('node')->condition('type', 'article')->accessCheck(TRUE);
@@ -82,7 +82,7 @@ function shruthi_exercise_update_100308() {
  *
  * Create the tables for country, state, and district.
  */
-function dependent_update_100411() {
+function shruthi_exercise_update_100411() {
   $schema = Database::getConnection()->schema();
   $connection = Database::getConnection();
 
