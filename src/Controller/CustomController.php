@@ -13,7 +13,7 @@ class CustomController extends ControllerBase {
   /**
    * The customservice.
    *
-   * @var \Drupal\pragathi_exercise\CustomService
+   * @var \Drupal\shruthi_exercise\CustomService
    */
   protected $customService;
 
