@@ -3,6 +3,7 @@
 namespace Drupal\shruthi_exercise\EventSubscriber;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\shruthi_exercise\Event\UserLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,6 +21,13 @@ class CustomEventSubscriber implements EventSubscriberInterface {
   protected $database;
 
   /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
    * The messenger service.
    *
    * @var \Drupal\Core\Messenger\MessengerInterface
@@ -34,9 +42,11 @@ class CustomEventSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    */
-  public function __construct(Connection $database, MessengerInterface $messenger) {
+  public function __construct(Connection $database, DateFormatterInterface $dateFormatter, MessengerInterface $messenger) {
     $this->database = $database;
+    $this->dateFormatter = $dateFormatter;
     $this->messenger = $messenger;
+
   }
 
   /**
@@ -68,7 +78,7 @@ class CustomEventSubscriber implements EventSubscriberInterface {
       ->execute()
       ->fetchField();
 
-    $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', ['%created_date' =>$this-> $dateFormatter->format($account_created, 'short')]));
+      $this->messenger->addStatus(t('Welcome to the site, your account was created on %created_date.', ['%created_date' => $this->dateFormatter->format($account_created, 'long'),]));
   }
 
 }

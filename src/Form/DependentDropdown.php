@@ -4,7 +4,7 @@ namespace Drupal\shruthi_exercise\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -141,7 +141,7 @@ class DependentDropdown extends FormBase {
    * Function to retrieve country options.
    */
   public function getCountry() {
-    $query = Database::getConnection()->select('country', 'c');
+    $query =  $this->database->select('country', 'c');
     $query->fields('c', ['id', 'name']);
     $result = $query->execute();
     $options = [];
@@ -156,7 +156,7 @@ class DependentDropdown extends FormBase {
    * Function to retrieve state options.
    */
   public function getState($country_id) {
-    $query = Database::getConnection()->select('state', 's');
+    $query = $this->database->select('state', 's');
     $query->fields('s', ['id', 'country_id', 'name']);
     $query->condition('s.country_id', $country_id);
     $result = $query->execute();
@@ -172,7 +172,7 @@ class DependentDropdown extends FormBase {
    * Function to retrieve district options.
    */
   public function getDistrict($state_id) {
-    $query = Database::getConnection()->select('district', 'd');
+    $query =  $this->database->select('district', 'd');
     $query->fields('d', ['id', 'state_id', 'name']);
     $query->condition('d.state_id', $state_id);
     $result = $query->execute();

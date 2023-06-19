@@ -16,7 +16,7 @@ function shruthi_exercise_form_alter(&$form, FormStateInterface $form_state, $fo
   // Calling service to call getName func from CustomService.php.
   $data = \Drupal::service('custom_service')->getName();
   // Prints the value provided in the config form.
-  print_r($data);
+  //print_r($data);
 }
 
 /**
