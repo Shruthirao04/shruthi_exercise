@@ -1,6 +1,6 @@
 (function ($) {
     $(document).ready(function () {
-        var $first = $('#edit-firstname');
+        var $first = $('#same-firstname');
         var $last = $('.form-item-lastname');
         if($first.is(':checked')){
             $last.hide();
@@ -20,10 +20,10 @@
 (function ($, Drupal, drupalSettings) {
     Drupal.behaviors.MyModuleBehavior = {
         attach: function (context, settings) {
-        var testing = drupalSettings.shruthi_exercise.testing;
-        alert(testing)
-        $('body').css('background', testing);
+        var color_body = drupalSettings.shruthi_exercise.color_body;
+        alert(color_body)
+        $('body').css('background', color_body);
         }
     };
-    // Drupal.behaviors.MyModuleBehavior.attach(document, Drupal.settings);
+
 })(jQuery, Drupal, drupalSettings);

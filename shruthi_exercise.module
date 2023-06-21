@@ -7,6 +7,7 @@
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\shruthi_exercise\Event\UserLoginEvent;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * Implements hook_form_alter().
@@ -70,10 +71,15 @@ function shruthi_exercise_page_attachments_alter(array &$attachments) {
     // Apply the css.
     $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
   }
+  $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
+  $attachments['#attached']['drupalSettings']['shruthi_exercise']['color_body'] = "testing";
 }
 /**
  * Implements hook_help().
  */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
 function shruthi_exercise_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the custom_mail module.
@@ -172,3 +178,17 @@ function shruthi_exercise_entity_view(array &$build, EntityInterface $entity, En
   ];
 
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+
+ function custom_config_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    if ($form_id == "node_article_edit_form") {
+      $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("tokenfield");
+      $node = \Drupal::routeMatch()->getParameter("node"); //type: node object
+      $token_service = \Drupal::token();
+      $hlptxt = $token_service->replace($helptext, ['node'=>$node], ['clear'=>TRUE]);
+      $form['#prefix'] = "<span>" . $hlptxt . "</span>";
+    }
+ }

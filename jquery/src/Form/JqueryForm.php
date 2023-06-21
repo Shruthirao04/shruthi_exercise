@@ -31,9 +31,6 @@ class JqueryForm extends FormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('same as above'),
       '#attributes' => ['id' => 'same-firstname'],
-      '#ajax' => [
-        'callback' => '::setAjaxSubmit',
-        ],
     ];
 
 
