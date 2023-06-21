@@ -2,3 +2,9 @@ config form permission:
   title: Permission
   description: Permission desc
   #creates a custom permission for config form
+
+Node permission:
+  title : 'clone permission'
+  description: 'permission'
+permission_callbacks:
+  - \Drupal\shruthi_exercise\DynamicPermission::nodePermission

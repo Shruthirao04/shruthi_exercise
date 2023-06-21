@@ -74,7 +74,7 @@ function shruthi_exercise_page_attachments_alter(array &$attachments) {
 /**
  * Implements hook_help().
  */
-function pragathi_exercise_help($route_name, RouteMatchInterface $route_match) {
+function shruthi_exercise_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the custom_mail module.
     case 'help.page.custom_mail':
@@ -135,3 +135,40 @@ function shruthi_exercise_entity_insert(EntityInterface $entity) {
 
 }
 
+/**
+ * Implements hook_entity_view_alter().
+ */
+function shruthi_exercise_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  if ($entity->getEntityTypeId() == "node") {
+    $build['field_text']['#title'] = "text title changed";
+    unset($build['field_date']);
+    $build['markup'] = [
+      '#markup' => "<h3>Testing the hook</h3>",
+    ];
+  }
+
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function shruthi_exercise_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  // Condition entity type = node.
+  $session = \Drupal::request()->getSession();
+  $counts = $session->get("shruthi_exercise.node_view_count", []);
+  if (!isset($counts[$entity->id()])) {
+    $counts[$entity->id()] = 1;
+  }
+  else {
+    $counts[$entity->id()]++;
+  }
+
+  $session->set("shruthi_exercise.node_view_count", $counts);
+  $build['count'] = [
+    '#markup' => "Viewed " . $counts[$entity->id()] . " times",
+    '#cache' => [
+      'max-age' => 0,
+    ],
+  ];
+
+}

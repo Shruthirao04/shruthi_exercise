@@ -1,0 +1,7 @@
+jquery.form:
+  path: '/jquery'
+  defaults:
+    _form: '\Drupal\jquery\Form\JqueryForm'
+    _title: 'Form'
+  requirements:
+    _permission: 'access content'

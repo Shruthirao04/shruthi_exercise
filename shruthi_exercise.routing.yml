@@ -40,3 +40,17 @@ shruthi_exercise.form:
     _title: 'Dependent Dropdown'
   requirements:
     _permission: 'access content'
+
+shruthi_exercise.clonetask:
+  path: '/node/{node}/title'
+  defaults:
+    _controller: '\Drupal\shruthi_exercise\Controller\NodeCloneController::clonenodeTitle'
+    _title_callback: '\Drupal\shruthi_exercise\Controller\NodeCloneController::clonePageTitle'
+  requirements:
+    _custom_access: '\Drupal\shruthi_exercise\Controller\NodeCloneController::accessNode'
+    _permission: 'Node Permission'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node

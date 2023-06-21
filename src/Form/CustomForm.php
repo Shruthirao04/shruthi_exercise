@@ -92,6 +92,24 @@ class CustomForm extends FormBase {
     return $form;
   }
 
+    /**
+ * {@inheritdoc}
+ */
+/*
+public function validateForm(array &$form, FormStateInterface $form_state) {
+  if (strlen($form_state->getValue('subject')) < 3) {
+    $form_state->setErrorByName('subject', $this->t('The subject is too short.'));
+  }
+}
+*/
+public function validateForm(array &$form, FormStateInterface $form_state) {
+$email = $form_state->getValue('email');
+  $pattern = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}';
+  if (!preg_match('/' . $pattern . '/', $email)) {
+    $form_state->setErrorByName('email', $this->t('Please enter a valid email address.'));
+  }
+}
+
   /**
    * Submit form.
    */
