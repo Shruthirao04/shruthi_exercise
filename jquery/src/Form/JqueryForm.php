@@ -21,6 +21,7 @@ class JqueryForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $attachments['#attached']['library'][] = 'jquery/js_lib';
     $form['firstname'] = [
       '#type' => 'textfield',
       '#title' => $this->t('firstname'),

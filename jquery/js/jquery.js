@@ -20,7 +20,7 @@
 (function ($, Drupal, drupalSettings) {
     Drupal.behaviors.MyModuleBehavior = {
         attach: function (context, settings) {
-        var color_body = drupalSettings.shruthi_exercise.color_body;
+        var color_body = drupalSettings.jquery.color_body;
         alert(color_body)
         $('body').css('background', color_body);
         }

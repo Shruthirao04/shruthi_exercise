@@ -71,8 +71,6 @@ function shruthi_exercise_page_attachments_alter(array &$attachments) {
     // Apply the css.
     $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
   }
-  $attachments['#attached']['library'][] = 'shruthi_exercise/css_lib';
-  $attachments['#attached']['drupalSettings']['shruthi_exercise']['color_body'] = "testing";
 }
 /**
  * Implements hook_help().

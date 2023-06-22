@@ -48,9 +48,10 @@ shruthi_exercise.clonetask:
     _title_callback: '\Drupal\shruthi_exercise\Controller\NodeCloneController::clonePageTitle'
   requirements:
     _custom_access: '\Drupal\shruthi_exercise\Controller\NodeCloneController::accessNode'
-    _permission: 'Node Permission'
   options:
     _admin_route: TRUE
     parameters:
       node:
         type: entity:node
+
+
