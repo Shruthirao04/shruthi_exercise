@@ -19,7 +19,7 @@ function shruthi_exercise_form_alter(&$form, FormStateInterface $form_state, $fo
   // Prints the value provided in the config form.
   //print_r($data);
   if ($form_id == "node_article_edit_form") {
-    $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("tokenfield");
+    $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("helptext");
     $node = \Drupal::routeMatch()->getParameter("node"); //type: node object
     $token_service = \Drupal::token();
     $hlptxt = $token_service->replace($helptext, ['node'=>$node], ['clear'=>TRUE]);

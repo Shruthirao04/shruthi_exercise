@@ -70,7 +70,7 @@ class CustomConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  /*public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     // Creates a form.
     // Used to load config obj then to retieve&modify data.
     $config = $this->config(static::CONFIGNAME);
@@ -95,11 +95,11 @@ class CustomConfigForm extends ConfigFormBase {
     // Returns the form.
     return parent::buildForm($form, $form_state);
   }
-*/
+
   /**
    * {@inheritdoc}
    */
-  /*
+
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Function for submitting form.
     $config = $this->config(static::CONFIGNAME)
@@ -109,41 +109,5 @@ class CustomConfigForm extends ConfigFormBase {
     // Saves the form values.
       ->save();
     $this->messenger->addStatus($this->t('The configuration is done.'));
-  }
-
-}
-*/
-
-/**
-     * {@inheritdoc}
-     */
-    public function buildForm(array $form, FormStateInterface $form_state) {
-      $config = $this->config(static::CONFIGNAME);
-      $form['tokenfield'] = [
-          '#type' => 'textfield',
-          '#title' => 'Apply tokens',
-          '#default_value' => $config->get("tokenfield"),
-      ];
-
-      // Token support.
-      if (\Drupal::moduleHandler()->moduleExists('token')) {
-          $form['tokens'] = [
-              '#title' => $this->t('Tokens'),
-              '#type' => 'container',
-          ];
-          $form['tokens']['help'] = [
-              '#theme' => 'token_tree_link',
-              '#token_types' => [
-              'node',
-              'term',
-              'comment',
-              ],
-              // '#token_types' => 'all'
-              '#global_types' => FALSE,
-              '#dialog' => TRUE,
-          ];
-      }
-
-      return Parent::buildForm($form, $form_state);
   }
 }

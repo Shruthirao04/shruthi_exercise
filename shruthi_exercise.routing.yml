@@ -54,4 +54,12 @@ shruthi_exercise.clonetask:
       node:
         type: entity:node
 
+shruthi_exercise.token_form:  #route name for custom form
+  path: "/token-form"  #this is the url for the custom form
+  defaults:
+    _form: '\Drupal\shruthi_exercise\Form\TokenForm'  #this gives the path where the custom file is present
+    _title: "token form "  #title for the custom page
+  requirements:
+    _permission: "access content"
+
 
