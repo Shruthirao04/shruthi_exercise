@@ -18,6 +18,13 @@ function shruthi_exercise_form_alter(&$form, FormStateInterface $form_state, $fo
   $data = \Drupal::service('custom_service')->getName();
   // Prints the value provided in the config form.
   //print_r($data);
+  if ($form_id == "node_article_edit_form") {
+    $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("tokenfield");
+    $node = \Drupal::routeMatch()->getParameter("node"); //type: node object
+    $token_service = \Drupal::token();
+    $hlptxt = $token_service->replace($helptext, ['node'=>$node], ['clear'=>TRUE]);
+    $form['#prefix'] = "<span>" . $hlptxt . "</span>";
+  }
 }
 
 /**
@@ -177,16 +184,11 @@ function shruthi_exercise_entity_view(array &$build, EntityInterface $entity, En
 
 }
 
-/**
- * Implements hook_form_alter().
+ /**
+ * Implements hook_entity_presave().
  */
-
- function custom_config_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-    if ($form_id == "node_article_edit_form") {
-      $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("tokenfield");
-      $node = \Drupal::routeMatch()->getParameter("node"); //type: node object
-      $token_service = \Drupal::token();
-      $hlptxt = $token_service->replace($helptext, ['node'=>$node], ['clear'=>TRUE]);
-      $form['#prefix'] = "<span>" . $hlptxt . "</span>";
-    }
- }
+function shruthi_exercise_entity_presave(EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == "node") {
+    $entity->set("title", "entity presaving the values");
+  }
+}
