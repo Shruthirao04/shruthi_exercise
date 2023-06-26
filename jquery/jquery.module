@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+
 function jquery_page_attachments_alter(array &$attachments) {
 $attachments['#attached']['library'][] = 'jquery/js_lib';
 $attachments['#attached']['drupalSettings']['jquery']['color_body'] = "testing";
