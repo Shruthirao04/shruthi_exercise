@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\shruthi_exercise\Event\UserLoginEvent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_form_alter().
@@ -83,7 +84,7 @@ function shruthi_exercise_page_attachments_alter(array &$attachments) {
  * Implements hook_help().
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
+
 
 function shruthi_exercise_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
@@ -184,19 +185,20 @@ function shruthi_exercise_entity_view(array &$build, EntityInterface $entity, En
 
 }
 
- /**
+/**
  * Implements hook_entity_presave().
  */
-/*function shruthi_exercise_entity_presave(EntityInterface $entity) {
+function shruthi_exercise_entity_presave(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == "node") {
     $entity->set("title", "entity presaving the values");
   }
-}*/
+}
 
+/*
 function shruthi_exercise_node_presave($node) {
   print_r($node->getCacheTags());
   print_r($node->getCacheContext());exit;
-}
+}*/
 
 
 
